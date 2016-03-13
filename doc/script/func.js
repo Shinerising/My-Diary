@@ -25,6 +25,11 @@ function showBalloon(x, y, text, alter) {
     }, 3500);
 }
 
+function hideAllBalloon() {
+    'use strict';
+    $('.balloon').addClass('balloon_hide');
+}
+
 function showNode(node) {
     'use strict';
     $(node).show();
@@ -148,7 +153,7 @@ function turnover(direction, callback) {
                 }, 1000);
                 if (dairy.openCount === 1 && dairy.hasLogin === false) {
                     setTimeout(function () {
-                        showBalloon("3.6", "1.8", "Click here to Sign up yourself!", 3);
+                        showBalloon("3.6", "1.8", "Don't have account? Click here to sign up!", 3);
                     }, 2200);
                 }
             }
@@ -253,6 +258,11 @@ function turnover(direction, callback) {
             setTimeout(function () {
                 $('#pen_main').removeClass('pen_hide');
             }, 2000);
+            if (dairy.openCount === 1 && dairy.hasLogin === true && dairy.newComer) {
+                setTimeout(function () {
+                    showBalloon("4.4", "1", "Click pen to start your writing!");
+                }, 3000);
+            }
             setTimeout(function () {
                 if ($('#butterfly_main').hasClass('leave')) {
                     $('#butterfly_main').removeClass('leave').addClass('fly');
@@ -346,6 +356,22 @@ function turnover(direction, callback) {
             }
         }
     }
+    hideAllBalloon();
+    if (dairy.newComer && dairy.hasLogin) {
+        if (dairy.stage === "last") {
+            setTimeout(function () {
+                showBalloon("3", "3", "Click here to start writing!", 1);
+            }, 1000);
+        } else if (dairy.stage === "index") {
+            setTimeout(function () {
+                showBalloon("4", "3", "Here is the Index, all your dairies are here.", 1);
+            }, 1000);
+        } else if (dairy.stage === "first") {
+            setTimeout(function () {
+                showBalloon(".8", "7.5", "Click the bookmark to quickly return.", 1);
+            }, 1000);
+        }
+    }
 }
 
 function showEdit(obj) {
@@ -380,6 +406,14 @@ function showEdit(obj) {
         node.find('.dairy_page_thumb img').attr('src', "images/image.svg");
         $('#dairy_image_upload').attr("src", "");
         node.find('.dairy_page_thumb').show();
+        if (dairy.newComer) {
+            setTimeout(function () {
+                showBalloon("3.4", "1.8", "Click emoji to change it!", 2);
+            }, 1000);
+            setTimeout(function () {
+                showBalloon("3", "2.5", "Drop or select an image to upload!", 3);
+            }, 5000);
+        }
     }
     weatherData.current = 0;
     emotionData.current = 0;

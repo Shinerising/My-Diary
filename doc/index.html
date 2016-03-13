@@ -280,10 +280,14 @@ Thanks to the individuals and groups who provided their helps!
                 setTimeout(function () {
                     $('#butterfly_main').removeClass('fly').addClass('idle');
                 }, 10000);
-                //showBalloon("1", "4.1", "Click dairy cover to read it!");
-                setTimeout(function () {
-                    //showBalloon("4.4", "1", "Click pen to start your writing!");
-                }, 1000);
+                if (dairy.newComer) {
+                    setTimeout(function () {
+                        showBalloon("1", "4.1", "Click dairy cover to start!");
+                    }, 1000);
+                }
+                else {
+                    showBalloon("4.4", "1", "Click pen to start your writing!");
+                }
                 $('#dairy_page_quote').text(quoteData[Math.floor(Math.random() * quoteData.length)]);
 
                 myDropzone = new Dropzone("div#dairy_image_upload", {
@@ -399,8 +403,12 @@ Thanks to the individuals and groups who provided their helps!
             hideNode('#dairy_info_text_signup');
             changeAvatar(iconData.current);
             if (dairy.openCount == 1) {
-                showBalloon(".8", "1.8", "Click here to change your own symbol!");
-                showBalloon("5.4", "3.5", "Type your info and Sign up!", 1);
+                setTimeout(function () {
+                    showBalloon(".8", "1.8", "Click here to change your own symbol!");
+                }, 1000);
+                setTimeout(function () {
+                    showBalloon("5.4", "3.5", "Type your info and Sign up!", 1);
+                }, 5000);
             }
         });
         $('#dairy_info_login').click(function () {
@@ -459,8 +467,6 @@ Thanks to the individuals and groups who provided their helps!
                             } else {
                                 showBalloon("5.4", "4", "This ID has been used!", 1);
                             }
-                        } else {
-                            changeAvatar(0);
                         }
                     });
             }
@@ -506,6 +512,9 @@ Thanks to the individuals and groups who provided their helps!
                                 setTimeout(function () {
                                     showNode('#dairy_page_quote');
                                     showNode('#dairy_first_container .dairy_page_next');
+                                    setTimeout(function () {
+                                        showBalloon("4", "6.8", "Click here to see new page!");
+                                    }, 2000);
                                     showNode('#pen_main');
                                 }, 4000);
                             } else {

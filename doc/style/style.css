@@ -618,7 +618,7 @@ body {
 
 .dairy_page_content {
     width: 90%;
-    height: 6.81rem;
+    height: 7rem;
     padding: 0 5%;
     font-size: .25rem;
     line-height: .35rem;
@@ -647,7 +647,7 @@ body {
 }
 
 .dairy_page_content p {
-    text-indent: .5rem;
+    text-indent: .3rem;
     font-size: .25rem;
     line-height: .35rem;
     -webkit-margin-before: 0;
@@ -660,7 +660,6 @@ body {
     line-height: .5rem;
     width: 100%;
     height: .5rem;
-    padding-top: .16rem;
     bottom: 0;
     background-color: papayawhip;
     background-image: url(textures/white-plaster.png);
@@ -673,13 +672,13 @@ body {
 .dairy_page_previous {
     position: absolute;
     left: .2rem;
-    top: .15rem;
+    top: 0;
 }
 
 .dairy_page_next {
     position: absolute;
     right: .2rem;
-    top: .15rem;
+    top: 0;
 }
 
 .dairy_button {
