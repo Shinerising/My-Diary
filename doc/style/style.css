@@ -147,7 +147,7 @@ body {
 
 #dairy_bottom0 {
     position: absolute;
-    top: 8.90625rem;
+    top: 8.7375rem;
     left: .52rem;
     width: 6.6675rem;
     height: .5625rem;
@@ -172,14 +172,14 @@ body {
 
 #dairy_bottom1 {
     position: absolute;
-    top: 8.90625rem;
+    top: 8.7375rem;
     left: 6.9375rem;
     width: .25rem;
-    height: .84375rem;
+    height: 1.01rem;
     border-radius: 0 0 .25rem 0;
     background-color: #FED;
-    background-size: 100% 7%;
-    background-image: radial-gradient(at left top, transparent 35%, #DDD 35%);
+    background-size: 100% 5.5%;
+    background-image: radial-gradient(at left top, transparent 32%, #DDD 32%);
     box-sizing: border-box;
 }
 
