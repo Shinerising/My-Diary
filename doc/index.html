@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<!--
+Name:                   My Dairy
+Author:                 Apollo Wayne
+Created Date:           2016.3.6
+Last Modified Date:     2016.3.13
+Used:
+    JavaScript library: jQuery https://jquery.com
+    Time formate library: Moment.js http://momentjs.com
+    SHA-3 hash library: js-sha3 https://github.com/emn178/js-sha3
+    Drag’n’drop file uploads plugin: DropzonJS http://www.dropzonejs.com
+    Transparent Textures http://www.transparenttextures.com
+Thanks to the individuals and groups who provided their helps!
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Diary</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no">
+    <meta name="theme-color" content="#832">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="script/jquery-2.1.3.min.js"></script>
+    <script src="script/sha3.min.js"></script>
+    <script src="script/moment.min.js"></script>
+    <script src="script/dropzone.js"></script>
+    <script src="script/data.js"></script>
+    <script src="script/func.js"></script>
+</head>
+
+<body>
+    <div id="desk" class="blur hide">
+        <div id="cover"><img src="images/wood_texture.jpg"></div>
+        <div id="area">
+
+            <div id="misc">
+                <div id="misc_coffee"><img src="images/coffee.svg"></div>
+                <div id="misc_phone"><img src="images/phone.svg"></div>
+                <div id="misc_glasses"><img src="images/glasses.svg"></div>
+            </div>
+
+            <div id="main">
+
+                <div id="dairy_main">
+                    <div id="dairy_back"></div>
+                    <div id="dairy_spine"></div>
+                    <div id="dairy_bottom0"></div>
+                    <div id="dairy_bottom"></div>
+                    <div id="dairy_bottom1"></div>
+                    <div id="dairy_bookmark"></div>
+                    <div id="dairy_pages">
+                        <div id="dairy_page_tempbox" hidden>
+
+                            <div id="dairy_page_temp_memory" class="dairy_page_main">
+                                <div class="dairy_page_header">
+                                    <span class="dairy_page_date"></span>
+                                    <span class="dairy_page_day"></span>
+                                    <span class="dairy_page_weather"></span>
+                                    <span class="dairy_page_emotion"></span>
+                                    <div class="dairy_update dairy_button">Edit</div>
+                                    <div class="dairy_delete dairy_button">Delete</div>
+                                    <div class="dairy_apply dairy_button hide" hidden>Delete</div>
+                                    <div class="dairy_cancel dairy_button hide" hidden>Go back</div>
+                                    <div class="dairy_attention hide" hidden>Really want to DELETE this page?</div>
+                                    <div class="dairy_page_thumb" hidden><img src=""></div>
+                                </div>
+                                <div class="dairy_page_content">
+                                    <div class="dairy_page_title"></div>
+                                    <div class="dairy_page_subtitle"></div>
+                                    <div class="dairy_page_text"></div>
+                                </div>
+                                <div class="dairy_page_foot">
+                                    <div class="dairy_page_pageID">1 / 1</div>
+                                    <div class="dairy_page_previous dairy_button">Previous Page</div>
+                                    <div class="dairy_page_next dairy_button">Next Page</div>
+                                </div>
+                            </div>
+
+                            <div id="dairy_page_temp_index" class="dairy_page_main">
+                                <div class="dairy_page_header">
+                                </div>
+                                <div class="dairy_page_index">
+                                    <div class="dairy_page_index_content">
+                                        <div class="dairy_page_index_title">Index</div>
+                                        <div class="dairy_page_index_alllist"></div>
+                                    </div>
+                                </div>
+                                <div class="dairy_page_foot">
+                                    <div class="dairy_page_pageID">1 / 1</div>
+                                    <div class="dairy_page_previous dairy_button">Previous Page</div>
+                                    <div class="dairy_page_next dairy_button">Next Page</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="dairy_page_container" id="dairy_edit_container" hidden>
+                            <div class="dairy_page" id="dairy_page_edit">
+                                <div class="dairy_page_main">
+                                    <div class="dairy_page_header">
+                                        <span class="dairy_page_date dairy_edit"></span>
+                                        <span class="dairy_page_day dairy_edit"></span>
+                                        <span class="dairy_page_weather dairy_edit"></span>
+                                        <span class="dairy_page_emotion dairy_edit"></span>
+                                        <div id="dairy_edit_apply" class="dairy_button">Save</div>
+                                        <div id="dairy_edit_cancel" class="dairy_button">Cancel</div>
+                                        <div id="dairy_edit_attention" class="hide" hidden>Really leave without saving?</div>
+                                        <div id="dairy_edit_image" class="dairy_page_thumb dairy_edit">
+                                            <div id="dairy_image_upload" src="">
+                                                <div class="dz-message" id="dairy_uploadicon"><img id="" src="images/image.svg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dairy_page_content">
+                                        <div class="dairy_page_title">
+                                            <input id="dairy_title_edit" type=text placeholder="Type Your Title">
+                                        </div>
+                                        <div class="dairy_page_subtitle">
+                                            <input id="dairy_subtitle_edit" type=text placeholder="Type Your SubTitle" value="">
+                                        </div>
+                                        <textarea id="dairy_content_edit" rows="16" placeholder="Write down your memories"></textarea>
+                                    </div>
+                                    <div class="dairy_page_foot">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dairy_page_container" id="dairy_last_container">
+                            <div class="dairy_page">
+                                <div class="dairy_page_main">
+                                    <div class="dairy_page_header">
+                                    </div>
+                                    <div id="dairy_last_button" class="dairy_button">Click here to add New memory!</div>
+                                    <div class="dairy_page_foot">
+                                        <div class="dairy_page_pageID">1 / 1</div>
+                                        <div class="dairy_page_previous dairy_button">Previous Page</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dairy_page_container dairy_active_container" content="empty" hidden>
+                            <div class="dairy_page">
+                            </div>
+                        </div>
+
+                        <div class="dairy_page_container dairy_active_container" content="empty" hidden>
+                            <div class="dairy_page">
+                            </div>
+                        </div>
+
+                        <div class="dairy_page_container" id="dairy_first_container">
+                            <div class="dairy_page">
+                                <div class="dairy_page_main">
+                                    <div class="dairy_page_header">
+                                        <div class="dairy_page_info">
+                                            <div id="dairy_info_text_signup">Please log in or</div>
+                                            <div id="dairy_info_text_login" class="hide" hidden>Already has account?</div>
+                                            <div id="dairy_info_text_logout" class="hide" hidden>You has logged in as</div>
+                                            <div id="dairy_info_signup" class="dairy_button">Sign Up</div>
+                                            <div id="dairy_info_login" class="dairy_button hide" hidden>Log In</div>
+                                            <div id="dairy_info_logout" class="dairy_button hide" hidden>Log Out</div>
+                                        </div>
+                                    </div>
+                                    <div id="dairy_avatar"></div>
+                                    <div>
+                                        <form id="dairy_page_form" autocomplete="off" action="/">
+                                            <div id="dairy_name" class="hide">Name:
+                                                <input class="dairy_input" type="text" name="name" value="" maxlength="20" placeholder="Type Your Name">
+                                            </div>
+                                            <div id="dairy_id">ID:
+                                                <input class="dairy_input" type="text" name="id" value="" maxlength="16" placeholder="Type Your Login ID">
+                                            </div>
+                                            <div id="dairy_password">Password:
+                                                <input class="dairy_input" type="password" name="pwd" value="" maxlength="12" placeholder="Type Your Password">
+                                            </div>
+                                            <div id="dairy_password_repeat" class="hide">Retype:
+                                                <input class="dairy_input" type="password" name="pwd" value="" maxlength="12" placeholder="Type Password Again">
+                                            </div>
+                                            <div id="dairy_formbuttons">
+                                                <div id="dairy_clear" class="dairy_button">Clear</div>
+                                                <div id="dairy_signup" class="dairy_button disabled hide" hidden>Sign Up</div>
+                                                <div id="dairy_login" class="dairy_button disabled">Log In</div>
+                                                <div id="dairy_formsending" class="shining hide" hidden>Logging in...</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="dairy_page_quote" class="hide" hidden></div>
+                                    <div class="dairy_page_foot">
+                                        <div class="dairy_page_previous dairy_button">Close Dairy</div>
+                                        <div class="dairy_page_next dairy_button hide" hidden>Next Page</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="dairy_cover_container">
+                            <div id="dairy_cover">
+                                <div id="dairy_front">
+                                    <div id="dairy_title">My Dairy</div>
+                                    <div id="dairy_icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pen_main" hidden>
+                    <img src="images/pen.svg">
+                </div>
+
+                <div id="butterfly_main" class="fly">
+                    <div id="butterfly_left"><img id="butterimg_left" src="images/butter_left.svg"></div>
+                    <div id="butterfly_right"><img id="butterimg_right" src="images/butter_right.svg"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="loading_panel">
+        <div id="loading_sticker">
+            <div id="loading_front">
+                <div id="loading_title">
+                    <div>Loading...</div>
+                </div>
+                <div id="loading_text">My Dairy</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var myDropzone;
+        Dropzone.options.myAwesomeDropzone = false;
+        Dropzone.autoDiscover = false;
+
+        var dairy = {
+            indexCount: 1,
+            memoryCount: 0,
+            pageCount: 3, //index + memory + 2
+            index: -1,
+            flipping: false,
+            openCount: 0,
+            hasLogin: false,
+            newComer: true,
+            stage: "cover",
+            currC: 1,
+            name: "Apollo Wayne",
+            id: "shinerising",
+            icon: 1
+        };
+
+        $(document).ready(function () {
+            loading(function () {
+                $('#butterfly_main').show();
+                $('#dairy_cover').click(function () {
+                    if (dairy.stage === "cover") {
+                        $('#pen_main').addClass('pen_hide');
+                        if ($('#butterfly_main').hasClass('idle')) $('#butterfly_main').removeClass('idle').addClass('leave');
+                        turnover(1);
+                    }
+                });
+                $('#pen_main').click(function () {
+                    if (dairy.stage === "cover") {
+                        $('#pen_main').addClass('pen_hide');
+                        if ($('#butterfly_main').hasClass('idle')) $('#butterfly_main').removeClass('idle').addClass('leave');
+                        turnover(dairy.pageCount, function () {
+                            showEdit();
+                        });
+                    }
+                });
+                setTimeout(function () {
+                    $('#butterfly_main').removeClass('fly').addClass('idle');
+                }, 10000);
+                //showBalloon("1", "4.1", "Click dairy cover to read it!");
+                setTimeout(function () {
+                    //showBalloon("4.4", "1", "Click pen to start your writing!");
+                }, 1000);
+                $('#dairy_page_quote').text(quoteData[Math.floor(Math.random() * quoteData.length)]);
+
+                myDropzone = new Dropzone("div#dairy_image_upload", {
+                    url: "/image-upload",
+                    paramName: "imageFile",
+                    maxFilesize: 2,
+                    maxFiles: 1,
+                    acceptedFiles: "image/*",
+                    autoProcessQueue: true,
+                    init: function () {
+                        this.on("addedfile", function (file) {
+                            $('#dairy_uploadicon').hide();
+                            $('#dairy_edit_image').css("border-color", "white");
+                            $('.dz-image').css("opacity", .5);
+                            this.processFile(file);
+                        });
+                        this.on("dragend", function (event) {
+                            $('#dairy_edit_image').css("border-color", "white");
+                        });
+                        this.on("dragover", function (event) {
+                            $('#dairy_edit_image').css("border-color", "lightgreen");
+                        });
+                        this.on("dragleave", function (event) {
+                            $('#dairy_edit_image').css("border-color", "white");
+                        });
+                        this.on("error", function (file, error) {
+                            console.log(file);
+                            console.log(error);
+                        });
+                        this.on("sending", function (file, obj, data) {
+                            $('.dz-image').css("opacity", .5);
+                        });
+                        this.on("success", function (file, data) {
+                            $('.dz-image').css("opacity", 1);
+                            $('#dairy_image_upload').attr("src", data);
+                        });
+                    },
+                    accept: function (file, done) {}
+                });
+            });
+        });
+
+        $('#dairy_last_button').click(function () {
+            showEdit();
+        });
+        $('.dairy_update').click(function () {
+            showEdit(memoryData[dairy.index - dairy.indexCount - 1]);
+        });
+        $('.dairy_page_next').click(function () {
+            turnover(1);
+        });
+        $('.dairy_page_previous').click(function () {
+            turnover(-1);
+        });
+        $('#butterfly_main').click(function () {
+            if ($('#butterfly_main').hasClass('idle')) $('#butterfly_main').removeClass('idle').addClass('leave');
+        });
+        $('#dairy_avatar').click(function () {
+            if (!$('#dairy_signup').hasClass('hide')) changeAvatar(iconData.current + 1);
+        });
+        $('.dairy_page_weather.dairy_edit').click(function () {
+            changeWeather(weatherData.current + 1, this);
+        });
+        $('.dairy_page_emotion.dairy_edit').click(function () {
+            changeEmotion(emotionData.current + 1, this);
+        });
+        $('#dairy_clear').click(function () {
+            $('#dairy_page_form input').val("");
+        });
+        $('#dairy_bookmark').click(function () {
+            if (dairy.stage === "index" || dairy.stage === "memory" || dairy.stage === "last") {
+                turnover(dairy.index * -1);
+            } else if (dairy.stage === "first") {
+                turnover(-1);
+            }
+        });
+        $('.dairy_delete').click(function () {
+            $('.dairy_attention').removeClass("hide").show();
+            $('.dairy_apply').removeClass("hide").show();
+            $('.dairy_cancel').removeClass("hide").show();
+            $('.dairy_delete').addClass("hide").hide();
+            $('.dairy_update').addClass("hide").hide();
+        });
+        $('.dairy_cancel').click(function () {
+            $('.dairy_apply').addClass("hide").hide();
+            $('.dairy_cancel').addClass("hide").hide();
+            $('.dairy_delete').removeClass("hide").show();
+            $('.dairy_update').removeClass("hide").show();
+            $('.dairy_attention').addClass("hide").hide();
+        });
+        $('#dairy_edit_cancel').click(function () {
+            if ($('#dairy_edit_attention').hasClass("hide")) {
+                $('#dairy_edit_attention').removeClass("hide").show();
+                $('#dairy_edit_apply').text("Leave");
+                $('#dairy_edit_cancel').text("Go back");
+            } else {
+                $('#dairy_edit_apply').text("Save");
+                $('#dairy_edit_cancel').text("Cancel");
+                $('#dairy_edit_attention').addClass("hide").hide();
+            }
+        });
+        $('#dairy_info_signup').click(function () {
+            showNode('#dairy_name');
+            $('#dairy_name').prop('disabled', false);
+            $('#dairy_name input').focus();
+            showNode('#dairy_password_repeat');
+            $('#dairy_password_repeat').prop('disabled', false);
+            showNode('#dairy_signup');
+            hideNode('#dairy_login', true);
+            showNode('#dairy_info_login');
+            showNode('#dairy_info_text_login');
+            hideNode('#dairy_info_signup', true);
+            hideNode('#dairy_info_text_signup');
+            changeAvatar(iconData.current);
+            if (dairy.openCount == 1) {
+                showBalloon(".8", "1.8", "Click here to change your own symbol!");
+                showBalloon("5.4", "3.5", "Type your info and Sign up!", 1);
+            }
+        });
+        $('#dairy_info_login').click(function () {
+            hideNode('#dairy_name');
+            $('#dairy_name').prop('disabled', true);
+            hideNode('#dairy_password_repeat');
+            $('#dairy_password_repeat').prop('disabled', true);
+            hideNode('#dairy_signup', true);
+            $('#dairy_id input').focus();
+            showNode('#dairy_login');
+            hideNode('#dairy_info_login', true);
+            hideNode('#dairy_info_text_login');
+            showNode('#dairy_info_signup');
+            showNode('#dairy_info_text_signup');
+            changeAvatar(-1);
+        });
+
+        $('input').on('input', function () {
+            $('#dairy_signup').removeClass('disabled');
+            $('#dairy_login').removeClass('disabled');
+            if ($('#dairy_page_form input').eq(0).val() == "") {
+                $('#dairy_signup').addClass('disabled');
+            }
+            if ($('#dairy_page_form input').eq(1).val() == "") {
+                $('#dairy_signup').addClass('disabled');
+                $('#dairy_login').addClass('disabled');
+            }
+            if ($('#dairy_page_form input').eq(2).val() == "") {
+                $('#dairy_signup').addClass('disabled');
+                $('#dairy_login').addClass('disabled');
+            }
+            if ($('#dairy_page_form input').eq(3).val() == "") {
+                $('#dairy_signup').addClass('disabled');
+            }
+        })
+
+        $("input").bind("keypress", {}, function (e) {
+            var code = (e.KeyCode ? e.KeyCode : e.which);
+            if (code == 13) {
+                if (!$('#dairy_signup').hasClass('hide') && !$('#dairy_signup').hasClass('disable')) $('#dairy_signup').click();
+                else if (!$('#dairy_login').hasClass('hide') && !$('#dairy_login').hasClass('disable')) $('#dairy_login').click();
+            }
+        });
+
+        $('#dairy_id input').focusout(function () {
+            if ($('#dairy_id input').val() != "") {
+                var getData = {
+                    "id": $("#dairy_id input").val()
+                };
+                $.get("/exist", getData, null, "json")
+                    .done(function (data) {
+                        console.log(data);
+                        if (data.success == true) {
+                            if ($('#dairy_signup').hasClass('hide')) {
+                                changeAvatar(data.params.icon);
+                            } else {
+                                showBalloon("5.4", "4", "This ID has been used!", 1);
+                            }
+                        } else {
+                            changeAvatar(0);
+                        }
+                    });
+            }
+        });
+        $('#dairy_signup').click(function () {
+            if (!$('#dairy_signup').hasClass('disabled')) {
+                if ($('#dairy_password_repeat input').val() != $('#dairy_password input').val()) {
+                    showBalloon("5.4", "4.8", "Please type two same passwords!", 1);
+                } else {
+                    var postData = {
+                        "name": $("#dairy_name input").val(),
+                        "id": $("#dairy_id input").val(),
+                        "password": sha3_256($("#dairy_password input").val()),
+                        "icon": iconData.current
+                    };
+                    $('#dairy_formsending').text("Signing Up...");
+                    $('#dairy_formsending').addClass('shining');
+                    showNode('#dairy_formsending');
+                    hideNode('#dairy_info_login', true);
+                    hideNode('#dairy_signup', true);
+                    hideNode('#dairy_clear', true);
+                    $.post("/signup", postData, null, "json")
+                        .done(function (data) {
+                            if (data.success) {
+                                console.log(data);
+                                $('#dairy_formsending').text("Sign up Successful!");
+                                $('#dairy_formsending').removeClass('shining');
+                                dairy.hasLogin = true;
+                                dairy.name = data.params.name;
+                                dairy.id = data.params.id;
+                                dairy.icon = data.params.icon;
+                                dairy.newComer = true;
+                                changeAvatar(data.params.icon);
+                                $('#dairy_icon').text(iconData.icons[iconData.current]);
+                                $('#dairy_title').text(data.params.name.split(" ")[0] + "'s Dairy");
+                                setTimeout(function () {
+                                    $('#dairy_info_text_logout').text("Logged in as " + data.params.id);
+                                    showNode('#dairy_info_text_logout');
+                                    showNode('#dairy_info_logout');
+                                    hideNode('#dairy_info_text_login', true);
+                                    hideNode('#dairy_page_form', true);
+                                }, 3000);
+                                setTimeout(function () {
+                                    showNode('#dairy_page_quote');
+                                    showNode('#dairy_first_container .dairy_page_next');
+                                    showNode('#pen_main');
+                                }, 4000);
+                            } else {
+                                $('#dairy_formsending').text("Sign up Failed!");
+                                $('#dairy_formsending').removeClass('shining');
+                                if (data.message) {
+                                    showBalloon("0", "4", data.message);
+                                }
+                                setTimeout(function () {
+                                    hideNode('#dairy_formsending', true);
+                                    showNode('#dairy_info_login');
+                                    showNode('#dairy_signup');
+                                    showNode('#dairy_clear');
+                                }, 3000);
+                            }
+                        }).fail(function () {
+                            $('#dairy_formsending').text("Sign up Failed!");
+                            $('#dairy_formsending').removeClass('shining');
+                            setTimeout(function () {
+                                hideNode('#dairy_formsending', true);
+                                showNode('#dairy_info_login');
+                                showNode('#dairy_signup');
+                                showNode('#dairy_clear');
+                            }, 3000);
+                        });
+                }
+            }
+        });
+        $('#dairy_login').click(function () {
+            if (!$('#dairy_login').hasClass('disabled')) {
+                var postData = {
+                    "id": $("#dairy_id input").val(),
+                    "password": sha3_256($("#dairy_password input").val())
+                };
+                $('#dairy_formsending').text("Logging in...");
+                $('#dairy_formsending').addClass('shining');
+                showNode('#dairy_formsending');
+                hideNode('#dairy_info_signup', true);
+                hideNode('#dairy_login', true);
+                hideNode('#dairy_clear', true);
+                $.post("/login", postData, null, "json")
+                    .done(function (data) {
+                        if (data.success) {
+                            console.log(data);
+                            $('#dairy_formsending').text("Log in Successful!");
+                            $('#dairy_formsending').removeClass('shining');
+                            dairy.hasLogin = true;
+                            dairy.name = data.params.name;
+                            dairy.id = data.params.id;
+                            dairy.icon = data.params.icon;
+                            dairy.newComer = false;
+                            changeAvatar(data.params.icon);
+                            $('#dairy_icon').text(iconData.icons[iconData.current]);
+                            $('#dairy_title').text(data.params.name.split(" ")[0] + "'s Dairy");
+                            setTimeout(function () {
+                                $('#dairy_info_text_logout').text("Logged in as " + data.params.id);
+                                showNode('#dairy_info_text_logout');
+                                showNode('#dairy_info_logout');
+                                hideNode('#dairy_info_text_signup', true);
+                                hideNode('#dairy_page_form', true);
+                            }, 3000);
+                            setTimeout(function () {
+                                showNode('#dairy_page_quote');
+                                getMemories(function () {
+                                    showNode('#dairy_first_container .dairy_page_next');
+                                    showNode('#pen_main');
+                                }, null);
+                            }, 4000);
+                        } else {
+                            $('#dairy_formsending').text("Log in Failed!");
+                            $('#dairy_formsending').removeClass('shining');
+                            if (data.message) {
+                                showBalloon("0", "4", data.message);
+                            }
+                            setTimeout(function () {
+                                hideNode('#dairy_formsending', true);
+                                showNode('#dairy_info_signup');
+                                showNode('#dairy_login');
+                                showNode('#dairy_clear');
+                            }, 3000);
+                        }
+                    })
+                    .fail(function () {
+                        $('#dairy_formsending').text("Log in Failed!");
+                        $('#dairy_formsending').removeClass('shining');
+                        setTimeout(function () {
+                            hideNode('#dairy_formsending', true);
+                            showNode('#dairy_info_signup');
+                            showNode('#dairy_login');
+                            showNode('#dairy_clear');
+                        }, 3000);
+                    });
+            }
+        });
+        $('#dairy_info_logout').click(function () {
+            $.get("/logout", null, null, "json")
+                .done(function (data) {
+                    console.log(data);
+                    location.reload();
+                });
+        });
+
+        $('#dairy_edit_apply').click(function () {
+            if ($('#dairy_edit_attention').hasClass("hide")) {
+                if ($('#dairy_title_edit').val() == "") {
+                    showBalloon("-1", "0", "Please type a title!");
+                } else if ($('#dairy_content_edit').val() == "") {
+                    showBalloon("-1", "3", "Please write something!");
+                } else {
+                    if (dairy.stage == "addnew") {
+                        $('#dairy_edit_attention').text("Saving your memory now...").removeClass("hide").show();
+                        $('#dairy_edit_apply').addClass('hide').hide();
+                        $('#dairy_edit_cancel').addClass('hide').hide();
+                        var postData = {
+                            "title": $('#dairy_title_edit').val(),
+                            "subtitle": $('#dairy_subtitle_edit').val(),
+                            "content": $('#dairy_content_edit').val(),
+                            "image": $('#dairy_image_upload').attr("src"),
+                            "date": $(".dairy_page_date.dairy_edit").text(),
+                            "day": $(".dairy_page_day.dairy_edit").text(),
+                            "weather": weatherData.current,
+                            "emotion": emotionData.current,
+                        };
+                        $.post("/addnew", postData, null, "json")
+                            .done(function (data) {
+                                console.log(data);
+                                if (data.success) {
+                                    $('#dairy_edit_attention').text("Really leave without saving?");
+                                    $('#dairy_edit_apply').removeClass('hide').show();
+                                    $('#dairy_edit_cancel').removeClass('hide').show();
+                                    postData._id = data.params._id;
+                                    addMemory(postData);
+                                } else {
+                                    $('#dairy_edit_attention').text("Saving your memory failed...");
+                                    if (data.message) {
+                                        showBalloon("0", "4", data.message);
+                                    }
+                                    setTimeout(function () {
+                                        $('#dairy_edit_attention').text("Really leave without saving?").addClass('hide').hide();
+                                        $('#dairy_edit_apply').removeClass('hide').show();
+                                        $('#dairy_edit_cancel').removeClass('hide').show();
+                                    }, 3000);
+                                }
+                            })
+                            .fail(function () {
+                                $('#dairy_edit_attention').text("Please check your network...");
+                                setTimeout(function () {
+                                    $('#dairy_edit_attention').text("Really leave without saving?").addClass('hide').hide();
+                                    $('#dairy_edit_apply').removeClass('hide').show();
+                                    $('#dairy_edit_cancel').removeClass('hide').show();
+                                }, 3000);
+                            });
+                    } else {
+                        $('#dairy_edit_attention').text("Updating your memory now...").removeClass("hide").show();
+                        $('#dairy_edit_apply').addClass('hide').hide();
+                        $('#dairy_edit_cancel').addClass('hide').hide();
+                        var postData = {
+                            "title": $('#dairy_title_edit').val(),
+                            "subtitle": $('#dairy_subtitle_edit').val(),
+                            "content": $('#dairy_content_edit').val(),
+                            "image": $('#dairy_image_upload').attr("src"),
+                            "date": $(".dairy_page_date.dairy_edit").text(),
+                            "day": $(".dairy_page_day.dairy_edit").text(),
+                            "weather": weatherData.current,
+                            "emotion": emotionData.current,
+                            "_id": memoryData[dairy.index - dairy.indexCount - 1]._id
+                        };
+                        $.post("/update", postData, null, "json")
+                            .done(function (data) {
+                                console.log(data);
+                                if (data.success) {
+                                    $('#dairy_edit_attention').text("Really leave without saving?");
+                                    $('#dairy_edit_apply').removeClass('hide').show();
+                                    $('#dairy_edit_cancel').removeClass('hide').show();
+                                    postData._id = data.params._id;
+                                    updateMemory(postData);
+                                } else {
+                                    $('#dairy_edit_attention').text("Updating your memory failed...");
+                                    if (data.message) {
+                                        showBalloon("0", "4", data.message);
+                                    }
+                                    setTimeout(function () {
+                                        $('#dairy_edit_attention').text("Really leave without saving?").addClass('hide').hide();
+                                        $('#dairy_edit_apply').removeClass('hide').show();
+                                        $('#dairy_edit_cancel').removeClass('hide').show();
+                                    }, 3000);
+                                }
+                            })
+                            .fail(function () {
+                                $('#dairy_edit_attention').text("Please check your network...");
+                                setTimeout(function () {
+                                    $('#dairy_edit_attention').text("Really leave without saving?").addClass('hide').hide();
+                                    $('#dairy_edit_apply').removeClass('hide').show();
+                                    $('#dairy_edit_cancel').removeClass('hide').show();
+                                }, 3000);
+                            });
+                    }
+                }
+            } else {
+                $('#dairy_edit_container').hide();
+                if (dairy.index === dairy.pageCount - 1) {
+                    dairy.stage = "last";
+                } else {
+                    dairy.stage = "memory";
+                }
+            }
+        });
+        $('.dairy_apply').click(function () {
+            $('.dairy_attention').text("Deleting your memory now...").removeClass("hide").show();
+            $('.dairy_apply').addClass('hide').hide();
+            $('.dairy_cancel').addClass('hide').hide();
+            var postData = {
+                "_id": memoryData[dairy.index - dairy.indexCount - 1]._id
+            };
+            $.get("/delete", postData, null, "json")
+                .done(function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        deleteMemory();
+                        setTimeout(function () {
+                            $('.dairy_attention').text("Really want to DELETE this page?").addClass("hide").hide();
+                            $('.dairy_delete').removeClass("hide").show();
+                            $('.dairy_update').removeClass("hide").show();
+                        }, 500);
+                    } else {
+                        $('.dairy_attention').text("Deleting your memory failed...");
+                        if (data.message) {
+                            showBalloon("0", "4", data.message);
+                        }
+                        setTimeout(function () {
+                            $('.dairy_attention').text("Really want to DELETE this page?").addClass('hide').hide();
+                            $('.dairy_delete').removeClass("hide").show();
+                            $('.dairy_update').removeClass("hide").show();
+                        }, 3000);
+                    }
+                })
+                .fail(function () {
+                    $('.dairy_attention').text("Please check your network...");
+                    setTimeout(function () {
+                        $('.dairy_attention').text("Really want to DELETE this page?").addClass('hide').hide();
+                        $('.dairy_delete').removeClass("hide").show();
+                        $('.dairy_update').removeClass("hide").show();
+                    }, 3000);
+                });
+        });
+    </script>
+</body>
+
+</html>
