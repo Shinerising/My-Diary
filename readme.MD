@@ -14,7 +14,7 @@ Attention: This project is still under development and could only be used as a p
 
 ## Third-Party Libraries
 * JavaScript library: jQuery https://jquery.com
-* Time formate library: Moment.js http://momentjs.com
+* Time format library: Moment.js http://momentjs.com
 * SHA-3 hash library: js-sha3 https://github.com/emn178/js-sha3
 * Drag’n’drop file uploads plugin: DropzonJS http://www.dropzonejs.com
 * Transparent Textures http://www.transparenttextures.com
