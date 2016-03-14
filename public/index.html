@@ -307,6 +307,8 @@ Thanks to the individuals and groups who provided their helps!
                                 $('#dairy_edit_image').css("border-color", "white");
                                 $('.dz-image').css("opacity", .5);
                                 this.processFile(file);
+                            } else {
+                                showBalloon("3", "2.5", "Image must be less than 2MB!", 3);
                             }
                         });
                         this.on("dragend", function (event) {
@@ -320,7 +322,6 @@ Thanks to the individuals and groups who provided their helps!
                         });
                         this.on("error", function (file, error) {
                             console.log(error);
-                            showBalloon("3", "2.5", "Image must be less than 2MB!", 3);
                             this.removeFile(file);
                             $('#dairy_uploadicon').show();
                         });
