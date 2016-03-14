@@ -401,6 +401,8 @@ function showEdit(obj) {
         node.find('#dairy_content_edit').val("");
         node.find('.dairy_page_date').text(moment().format('MMM Do'));
         node.find('.dairy_page_day').text(moment().format('ddd'));
+        weatherData.current = 0;
+        emotionData.current = 0;
         node.find('.dairy_page_weather').html(weatherData.icons[0]);
         node.find('.dairy_page_emotion').html(emotionData.icons[0]);
         node.find('.dairy_page_thumb img').attr('src', "images/image.svg");

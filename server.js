@@ -59,12 +59,13 @@ app.use(cookieParser());
 app.use(session({
     secret: 'my dairy',
     resave: true,
+    saveUninitialized: true,
     store: new MongoStore({
         mongooseConnection: db
     }),
     cookie: {
         httpOnly: false,
-        maxAge: new Date(Date.now() + 60 * 60 * 1000)
+        maxAge: new Date(Date.now() + 24 * 60 * 60 * 1000)
     }
 }));
 
@@ -387,11 +388,11 @@ app.post('/update', function(req, res) {
     }
 });
 
-app.get('/delete', function(req, res) {
+app.post('/delete', function(req, res) {
     if (req.session && req.session.userid) {
-
         Memory.findOneAndRemove({
-            _id: req.query._id
+            _id: req.body._id,
+            owner: req.session.userid
         }, function(error, memory) {
             var success = false;
             var message = "";
@@ -408,7 +409,7 @@ app.get('/delete', function(req, res) {
                 "success": success,
                 "message": message,
                 "params": {
-                    "_id": req.query._id
+                    "_id": req.body._id
                 }
             };
             return res.json(data);
