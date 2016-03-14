@@ -72,7 +72,7 @@ body {
 }
 
 #desk {
-    transition: -webkit-filter 1s, opacity 2s;
+    transition: -webkit-filter 1s, opacity 2s, filter 1s;
 }
 
 #cover {
@@ -276,6 +276,7 @@ body {
     line-height: .875rem;
     color: transparent;
     background-color: rgba(30, 40, 50, 0.8);
+    background-clip: text;
     -webkit-background-clip: text;
     overflow: hidden;
     text-shadow: rgba(170, 136, 102, 0.5) 0 .02rem .02rem;
@@ -290,6 +291,7 @@ body {
     line-height: 2.5rem;
     color: transparent;
     background-color: rgba(30, 40, 50, 0.5);
+    background-clip: text;
     -webkit-background-clip: text;
     text-shadow: rgba(170, 136, 102, 0.5) 0 .03rem .03rem;
 }
@@ -301,7 +303,8 @@ body {
     width: 13.375rem;
     height: 8.5rem;
     z-index: 0;
-    -webkit-perspective: 1000;
+    perspective: 20rem;
+    -webkit-perspective: 20rem;
 }
 
 .dairy_page_container {
@@ -650,6 +653,8 @@ body {
     text-indent: .3rem;
     font-size: .25rem;
     line-height: .35rem;
+    margin-before: 0;
+    margin-after: 0;
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
 }
@@ -770,7 +775,8 @@ body {
     right: .5rem;
     top: 4rem;
     transform: rotate(-20deg);
-    -webkit-perspective: 1000;
+    perspective: 20rem;
+    -webkit-perspective: 20rem;
 }
 
 #butterfly_main:before {
@@ -938,6 +944,7 @@ body {
 }
 
 .blur {
+    filter: blur(.3in);
     -webkit-filter: blur(.3in);
 }
 
