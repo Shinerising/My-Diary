@@ -5,7 +5,7 @@ Back-end is written by Node.js
 
 Check the DEMO here: http://bit.do/myawesomedairy (Only tested on Chrome and Safari, other browers may not be compatible)
 
-#Attention: This project is still under development and could only be used as a preview.#
+Attention: This project is still under development and could only be used as a preview.
 
 ## Features
 * Classic UI Style
