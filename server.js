@@ -8,7 +8,7 @@ var MongoStore = require('connect-mongo')(session);
 var fs = require('fs');
 var multer = require('multer')
 var upload = multer({
-    dest: 'doc/uploads/'
+    dest: 'public/uploads/'
 })
 
 mongoose.connect('mongodb://localhost/mydairy');
@@ -50,7 +50,7 @@ var MemorySchema = new mongoose.Schema({
 });
 var Memory = mongoose.model('Memory', MemorySchema);
 
-app.use(express.static(__dirname + '/doc'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
