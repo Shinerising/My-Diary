@@ -430,15 +430,3 @@ app.post('/delete', function(req, res) {
 app.post('/image-upload', upload.single('imageFile'), function(req, res) {
     res.send("uploads/" + req.file.filename);
 });
-
-app.get('/clearuser', function(req, res) {
-    User.remove({}, function(error, doc) {
-        res.send('User data has been cleared!');
-    });
-});
-
-app.get('/cleardairy', function(req, res) {
-    Memory.remove({}, function(error, doc) {
-        res.send('Dairy data has been cleared!');
-    });
-});
