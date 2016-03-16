@@ -6,10 +6,12 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var fs = require('fs');
-var multer = require('multer')
+var multer = require('multer');
 var upload = multer({
     dest: 'public/uploads/'
-})
+});
+
+/* Connect MongoDB */
 
 mongoose.connect('mongodb://localhost/mydairy');
 var db = mongoose.connection;
@@ -17,6 +19,11 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("connected.");
 });
+
+/* Create MongoDB Schema and Model */
+/* User: User Profiles */
+/* Memory: Users' Dairies */
+
 var UserSchema = new mongoose.Schema({
     name: String,
     id: String,
@@ -50,11 +57,18 @@ var MemorySchema = new mongoose.Schema({
 });
 var Memory = mongoose.model('Memory', MemorySchema);
 
+/* Add Express Middlewares */
+
+/* Serve Static Files */
 app.use(express.static(__dirname + '/public'));
+
+/* Parse Post Requests */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+/* Cookie Handle */
 app.use(cookieParser());
 app.use(session({
     secret: 'my dairy',
@@ -69,7 +83,10 @@ app.use(session({
     }
 }));
 
+/* Start server */
 app.listen(8080);
+
+/* Check if userID exists */
 
 app.get('/exist', function(req, res) {
     User.findOne({
@@ -97,6 +114,8 @@ app.get('/exist', function(req, res) {
         return res.json(data);
     });
 });
+
+/* Check if user has logged in by Cookie */
 
 app.get('/islogged', function(req, res) {
     if (req.session && req.session.userid) {
@@ -143,6 +162,8 @@ app.get('/islogged', function(req, res) {
         return res.json(data);
     }
 });
+
+/* Sign up new user profile */
 
 app.post('/signup', function(req, res) {
     User.findOne({
@@ -208,6 +229,8 @@ app.post('/signup', function(req, res) {
     });
 });
 
+/* User log in */
+
 app.post('/login', function(req, res) {
     User.findOne({
         id: req.body.id,
@@ -244,6 +267,8 @@ app.post('/login', function(req, res) {
     });
 });
 
+/* User log out */
+
 app.get('/logout', function(req, res) {
     req.session.destroy();
     console.log('deleted sesstion');
@@ -255,6 +280,8 @@ app.get('/logout', function(req, res) {
     };
     return res.json(data);
 });
+
+/* Get all dairies of user */
 
 app.post('/pages', function(req, res) {
     if (req.session && req.session.userid) {
@@ -283,12 +310,13 @@ app.post('/pages', function(req, res) {
             "action": "pages",
             "success": false,
             "message": "You don't log in!",
-            "params": {
-            }
+            "params": {}
         };
         return res.json(data);
     }
 });
+
+/* Add a new dairy */
 
 app.post('/addnew', function(req, res) {
     if (req.session && req.session.userid) {
@@ -336,6 +364,8 @@ app.post('/addnew', function(req, res) {
         return res.json(data);
     }
 });
+
+/* Update a existed dairy */
 
 app.post('/update', function(req, res) {
     if (req.session && req.session.userid) {
@@ -388,6 +418,8 @@ app.post('/update', function(req, res) {
     }
 });
 
+/* Delete a existed dairy */
+
 app.post('/delete', function(req, res) {
     if (req.session && req.session.userid) {
         Memory.findOneAndRemove({
@@ -398,7 +430,7 @@ app.post('/delete', function(req, res) {
             var message = "";
             if (error) {
                 message = error;
-            } 
+            }
             if (memory) {
                 success = true;
             } else {
@@ -426,6 +458,8 @@ app.post('/delete', function(req, res) {
         return res.json(data);
     }
 });
+
+/* Upload a image */
 
 app.post('/image-upload', upload.single('imageFile'), function(req, res) {
     res.send("uploads/" + req.file.filename);
