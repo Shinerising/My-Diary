@@ -1,6 +1,6 @@
 /*global
     $, jQuery, alert, console, moment,
-    dairy,
+    diary,
     iconData, weatherData, emotionData, indexData:true, memoryData:true, myDropzone
 */
 
@@ -51,16 +51,16 @@ function hideNode(node, n) {
 function changeAvatar(id) {
     'use strict';
     if (id === -1) {
-        $('#dairy_avatar').css('color', 'transparent');
+        $('#diary_avatar').css('color', 'transparent');
     } else {
         iconData.current = id;
         if (iconData.current >= iconData.icons.length) {
             iconData.current = 0;
         }
-        $('#dairy_avatar').css('color', 'transparent');
+        $('#diary_avatar').css('color', 'transparent');
         setTimeout(function () {
-            $('#dairy_avatar').text(iconData.icons[iconData.current]);
-            $('#dairy_avatar').css('color', 'inherit');
+            $('#diary_avatar').text(iconData.icons[iconData.current]);
+            $('#diary_avatar').css('color', 'inherit');
         }, 1000);
     }
 }
@@ -93,18 +93,18 @@ function changeEmotion(id, node) {
 
 function loadMemory(node, obj) {
     'use strict';
-    node.find('.dairy_page_title').text(obj.title);
-    node.find('.dairy_page_subtitle').text(obj.subtitle);
-    node.find('.dairy_page_text').html("<p>" + obj.content.replace(/(?:\r\n|\r|\n)/g, "</p><p>") + "</p>");
-    node.find('.dairy_page_date').text(obj.date);
-    node.find('.dairy_page_day').text(obj.day);
-    node.find('.dairy_page_weather').html(weatherData.icons[obj.weather]);
-    node.find('.dairy_page_emotion').html(emotionData.icons[obj.emotion]);
+    node.find('.diary_page_title').text(obj.title);
+    node.find('.diary_page_subtitle').text(obj.subtitle);
+    node.find('.diary_page_text').html("<p>" + obj.content.replace(/(?:\r\n|\r|\n)/g, "</p><p>") + "</p>");
+    node.find('.diary_page_date').text(obj.date);
+    node.find('.diary_page_day').text(obj.day);
+    node.find('.diary_page_weather').html(weatherData.icons[obj.weather]);
+    node.find('.diary_page_emotion').html(emotionData.icons[obj.emotion]);
     if (obj.image) {
-        node.find('.dairy_page_thumb img').attr('src', obj.image);
-        node.find('.dairy_page_thumb').show();
+        node.find('.diary_page_thumb img').attr('src', obj.image);
+        node.find('.diary_page_thumb').show();
     } else {
-        node.find('.dairy_page_thumb').hide();
+        node.find('.diary_page_thumb').hide();
     }
 }
 
@@ -116,14 +116,14 @@ function loadIndexList(node, index) {
         if (i >= indexData.length) {
             break;
         }
-        str += "<div class='dairy_page_index_list' onclick='indexClick(" + i + ")'>" + indexData[i] + "</div>";
+        str += "<div class='diary_page_index_list' onclick='indexClick(" + i + ")'>" + indexData[i] + "</div>";
     }
-    node.find('.dairy_page_index_alllist').html(str);
+    node.find('.diary_page_index_alllist').html(str);
 }
 
 function turnover(direction, callback) {
     'use strict';
-    if (dairy.flipping) {
+    if (diary.flipping) {
         return;
     }
     if ($('#butterfly_main').hasClass('idle')) {
@@ -131,80 +131,80 @@ function turnover(direction, callback) {
     }
     var node0, node1, dur, tim;
     if (direction > 0) {
-        if (dairy.index === -1) {
-            dairy.index += 1;
-            dairy.flipping = true;
-            dairy.openCount += 1;
-            dairy.stage = "first";
-            $('#dairy_main').addClass('open');
+        if (diary.index === -1) {
+            diary.index += 1;
+            diary.flipping = true;
+            diary.openCount += 1;
+            diary.stage = "first";
+            $('#diary_main').addClass('open');
             setTimeout(function () {
-                $('#dairy_front').css('opacity', 0);
+                $('#diary_front').css('opacity', 0);
             }, 600);
             if (direction > 1) {
                 setTimeout(function () {
-                    $('#dairy_cover_container').css('z-index', 0);
-                    dairy.flipping = false;
+                    $('#diary_cover_container').css('z-index', 0);
+                    diary.flipping = false;
                     turnover(direction - 1, callback);
                 }, 1000);
             } else {
                 setTimeout(function () {
-                    $('#dairy_cover_container').css('z-index', 0);
-                    dairy.flipping = false;
+                    $('#diary_cover_container').css('z-index', 0);
+                    diary.flipping = false;
                 }, 1000);
-                if (dairy.openCount === 1 && dairy.hasLogin === false) {
+                if (diary.openCount === 1 && diary.hasLogin === false) {
                     setTimeout(function () {
                         showBalloon("3.6", "1.8", "Don't have account? Click here to sign up!", 3);
                     }, 2200);
                 }
             }
-        } else if (dairy.index < dairy.pageCount - direction) {
-            if (dairy.stage === "first") {
-                node0 = $('#dairy_first_container');
+        } else if (diary.index < diary.pageCount - direction) {
+            if (diary.stage === "first") {
+                node0 = $('#diary_first_container');
             } else {
-                node0 = $('.dairy_active_container').eq(dairy.currC);
+                node0 = $('.diary_active_container').eq(diary.currC);
             }
 
-            dairy.index += direction;
-            dairy.flipping = true;
-            if (dairy.stage !== "index" && dairy.index < 1 + dairy.indexCount) {
-                dairy.stage = "index";
-            } else if (dairy.stage !== "memory" && dairy.index >= 1 + dairy.indexCount && dairy.index <= dairy.pageCount - 2) {
-                dairy.stage = "memory";
-            } else if (dairy.index === dairy.pageCount - 1) {
-                dairy.stage = "last";
+            diary.index += direction;
+            diary.flipping = true;
+            if (diary.stage !== "index" && diary.index < 1 + diary.indexCount) {
+                diary.stage = "index";
+            } else if (diary.stage !== "memory" && diary.index >= 1 + diary.indexCount && diary.index <= diary.pageCount - 2) {
+                diary.stage = "memory";
+            } else if (diary.index === diary.pageCount - 1) {
+                diary.stage = "last";
             }
-            if (dairy.index === 1) {
-                node1 = $('.dairy_active_container').eq(1);
+            if (diary.index === 1) {
+                node1 = $('.diary_active_container').eq(1);
                 if (node1.attr("content") !== "index") {
                     node1.children().empty();
-                    $('#dairy_page_temp_index').clone(true).removeAttr('id').appendTo(node1.children());
+                    $('#diary_page_temp_index').clone(true).removeAttr('id').appendTo(node1.children());
                     node1.attr("content", "index");
                 }
-                loadIndexList(node1, dairy.index - 1);
-                dairy.currC = 1;
-            } else if (dairy.stage === "last") {
-                node1 = $('#dairy_last_container');
-            } else if (dairy.stage === "index") {
-                node1 = $('.dairy_active_container').eq(1 - dairy.currC);
+                loadIndexList(node1, diary.index - 1);
+                diary.currC = 1;
+            } else if (diary.stage === "last") {
+                node1 = $('#diary_last_container');
+            } else if (diary.stage === "index") {
+                node1 = $('.diary_active_container').eq(1 - diary.currC);
                 if (node1.attr("content") !== "index") {
                     node1.children().empty();
-                    $('#dairy_page_temp_index').clone(true).removeAttr('id').appendTo(node1.children());
+                    $('#diary_page_temp_index').clone(true).removeAttr('id').appendTo(node1.children());
                     node1.attr("content", "index");
                 }
-                loadIndexList(node1, dairy.index - 1);
-                dairy.currC = 1 - dairy.currC;
-            } else if (dairy.stage === "memory") {
-                node1 = $('.dairy_active_container').eq(1 - dairy.currC);
+                loadIndexList(node1, diary.index - 1);
+                diary.currC = 1 - diary.currC;
+            } else if (diary.stage === "memory") {
+                node1 = $('.diary_active_container').eq(1 - diary.currC);
                 if (node1.attr("content") !== "memory") {
                     node1.children().empty();
-                    $('#dairy_page_temp_memory').clone(true).removeAttr('id').appendTo(node1.children());
+                    $('#diary_page_temp_memory').clone(true).removeAttr('id').appendTo(node1.children());
                     node1.attr("content", "memory");
                 }
-                loadMemory(node1, memoryData[dairy.index - dairy.indexCount - 1]);
-                dairy.currC = 1 - dairy.currC;
+                loadMemory(node1, memoryData[diary.index - diary.indexCount - 1]);
+                diary.currC = 1 - diary.currC;
             }
-            if (dairy.stage !== "first") {
-                node1.find(".dairy_page_pageID").text(dairy.index + " / " + (dairy.pageCount - 1));
+            if (diary.stage !== "first") {
+                node1.find(".diary_page_pageID").text(diary.index + " / " + (diary.pageCount - 1));
             }
 
             node0.show();
@@ -218,7 +218,7 @@ function turnover(direction, callback) {
                     node0.addClass('flipped');
                 }, 300);
                 setTimeout(function () {
-                    dairy.flipping = false;
+                    diary.flipping = false;
                     node0.css("z-index", 1000);
                 }, 1000);
             } else {
@@ -232,7 +232,7 @@ function turnover(direction, callback) {
                     node0.addClass('flipped');
                 }, 100);
                 setTimeout(function () {
-                    dairy.flipping = false;
+                    diary.flipping = false;
                     node0.removeClass('quickflipping').addClass('flipping');
                     node1.removeClass('flipped');
                     node0.css("z-index", 1000);
@@ -243,22 +243,22 @@ function turnover(direction, callback) {
             }
         }
     } else if (direction < 0) {
-        if (dairy.index === 0) {
-            $('#dairy_main').removeClass('open');
-            dairy.index -= 1;
-            dairy.flipping = true;
-            dairy.stage = "cover";
-            $('#dairy_cover_container').css('z-index', 1000);
+        if (diary.index === 0) {
+            $('#diary_main').removeClass('open');
+            diary.index -= 1;
+            diary.flipping = true;
+            diary.stage = "cover";
+            $('#diary_cover_container').css('z-index', 1000);
             setTimeout(function () {
-                $('#dairy_front').css('opacity', 1);
+                $('#diary_front').css('opacity', 1);
             }, 600);
             setTimeout(function () {
-                dairy.flipping = false;
+                diary.flipping = false;
             }, 2000);
             setTimeout(function () {
                 $('#pen_main').removeClass('pen_hide');
             }, 2000);
-            if (dairy.openCount === 1 && dairy.hasLogin === true && dairy.newComer) {
+            if (diary.openCount === 1 && diary.hasLogin === true && diary.newComer) {
                 setTimeout(function () {
                     showBalloon("4.4", "1", "Click pen to start your writing!");
                 }, 3000);
@@ -271,49 +271,49 @@ function turnover(direction, callback) {
                     }, 10000);
                 }
             }, 4000);
-        } else if (dairy.index + direction >= 0) {
-            if (dairy.stage === "last") {
-                node1 = $('#dairy_last_container');
+        } else if (diary.index + direction >= 0) {
+            if (diary.stage === "last") {
+                node1 = $('#diary_last_container');
             } else {
-                node1 = $('.dairy_active_container').eq(dairy.currC);
+                node1 = $('.diary_active_container').eq(diary.currC);
             }
 
-            dairy.index += direction;
-            dairy.flipping = true;
-            if (dairy.index === 0) {
-                dairy.stage = "first";
-            } else if (dairy.index < 1 + dairy.indexCount) {
-                dairy.stage = "index";
+            diary.index += direction;
+            diary.flipping = true;
+            if (diary.index === 0) {
+                diary.stage = "first";
+            } else if (diary.index < 1 + diary.indexCount) {
+                diary.stage = "index";
             } else {
-                dairy.stage = "memory";
+                diary.stage = "memory";
             }
 
-            if (dairy.stage === "first") {
-                node0 = $('#dairy_first_container');
-            } else if (dairy.stage === "index") {
-                node0 = $('.dairy_active_container').eq(1 - dairy.currC);
+            if (diary.stage === "first") {
+                node0 = $('#diary_first_container');
+            } else if (diary.stage === "index") {
+                node0 = $('.diary_active_container').eq(1 - diary.currC);
                 if (node0.attr("content") !== "index") {
                     node0.children().empty();
-                    $('#dairy_page_temp_index').clone(true).removeAttr('id').appendTo(node0.children());
+                    $('#diary_page_temp_index').clone(true).removeAttr('id').appendTo(node0.children());
                     node0.attr("content", "index");
                 }
-                loadIndexList(node0, dairy.index - 1);
-                dairy.currC = 1 - dairy.currC;
-            } else if (dairy.stage === "memory") {
-                node0 = $('.dairy_active_container').eq(1 - dairy.currC);
+                loadIndexList(node0, diary.index - 1);
+                diary.currC = 1 - diary.currC;
+            } else if (diary.stage === "memory") {
+                node0 = $('.diary_active_container').eq(1 - diary.currC);
                 if (node0.attr("content") !== "memory") {
                     node0.children().empty();
-                    $('#dairy_page_temp_memory').clone(true).removeAttr('id').appendTo(node0.children());
+                    $('#diary_page_temp_memory').clone(true).removeAttr('id').appendTo(node0.children());
                     node0.attr("content", "memory");
                 }
-                loadMemory(node0, memoryData[dairy.index - dairy.indexCount - 1]);
-                dairy.currC = 1 - dairy.currC;
+                loadMemory(node0, memoryData[diary.index - diary.indexCount - 1]);
+                diary.currC = 1 - diary.currC;
             }
-            if (dairy.stage !== "first") {
-                node0.find(".dairy_page_pageID").text(dairy.index + " / " + (dairy.pageCount - 1));
+            if (diary.stage !== "first") {
+                node0.find(".diary_page_pageID").text(diary.index + " / " + (diary.pageCount - 1));
             }
 
-            if (dairy.stage === "first") {
+            if (diary.stage === "first") {
                 $('.flipping').removeClass('flipping flipani').hide();
             }
             node0.show();
@@ -330,7 +330,7 @@ function turnover(direction, callback) {
                     node0.removeClass('flipped');
                 }, 400);
                 setTimeout(function () {
-                    dairy.flipping = false;
+                    diary.flipping = false;
                     node0.css("z-index", 1000);
                     node1.css("z-index", 999);
                 }, 1000);
@@ -348,7 +348,7 @@ function turnover(direction, callback) {
                     node0.removeClass('flipped');
                 }, dur - 100);
                 setTimeout(function () {
-                    dairy.flipping = false;
+                    diary.flipping = false;
                     node0.removeClass('quickflippingback');
                     node0.css("z-index", 1000);
                     node1.css("z-index", 999);
@@ -357,16 +357,16 @@ function turnover(direction, callback) {
         }
     }
     hideAllBalloon();
-    if (dairy.newComer && dairy.hasLogin) {
-        if (dairy.stage === "last") {
+    if (diary.newComer && diary.hasLogin) {
+        if (diary.stage === "last") {
             setTimeout(function () {
                 showBalloon("3", "3", "Click here to start writing!", 1);
             }, 1000);
-        } else if (dairy.stage === "index") {
+        } else if (diary.stage === "index") {
             setTimeout(function () {
                 showBalloon("4", "3", "Here is the Index, all your dairies are here.", 1);
             }, 1000);
-        } else if (dairy.stage === "first") {
+        } else if (diary.stage === "first") {
             setTimeout(function () {
                 showBalloon(".8", "7.5", "Click the bookmark to quickly return.", 1);
             }, 1000);
@@ -376,39 +376,39 @@ function turnover(direction, callback) {
 
 function showEdit(obj) {
     'use strict';
-    var node = $('#dairy_edit_container');
+    var node = $('#diary_edit_container');
     if (obj) {
-        dairy.stage = "update";
-        node.find('#dairy_title_edit').val(obj.title);
-        node.find('#dairy_subtitle_edit').val(obj.subtitle);
-        node.find('#dairy_content_edit').val(obj.content);
-        node.find('.dairy_page_date').text(obj.date);
-        node.find('.dairy_page_day').text(obj.day);
-        node.find('.dairy_page_weather').html(weatherData.icons[obj.weather]);
-        node.find('.dairy_page_emotion').html(emotionData.icons[obj.emotion]);
+        diary.stage = "update";
+        node.find('#diary_title_edit').val(obj.title);
+        node.find('#diary_subtitle_edit').val(obj.subtitle);
+        node.find('#diary_content_edit').val(obj.content);
+        node.find('.diary_page_date').text(obj.date);
+        node.find('.diary_page_day').text(obj.day);
+        node.find('.diary_page_weather').html(weatherData.icons[obj.weather]);
+        node.find('.diary_page_emotion').html(emotionData.icons[obj.emotion]);
         if (obj.image) {
-            node.find('.dairy_page_thumb img').attr('src', obj.image);
-            $('#dairy_image_upload').attr("src", obj.image);
-            node.find('.dairy_page_thumb').show();
+            node.find('.diary_page_thumb img').attr('src', obj.image);
+            $('#diary_image_upload').attr("src", obj.image);
+            node.find('.diary_page_thumb').show();
         } else {
-            node.find('.dairy_page_thumb img').attr('src', "images/image.svg");
-            node.find('.dairy_page_thumb').show();
+            node.find('.diary_page_thumb img').attr('src', "images/image.svg");
+            node.find('.diary_page_thumb').show();
         }
     } else {
-        dairy.stage = "addnew";
-        node.find('#dairy_title_edit').val("");
-        node.find('#dairy_subtitle_edit').val("By " + dairy.name);
-        node.find('#dairy_content_edit').val("");
-        node.find('.dairy_page_date').text(moment().format('MMM Do'));
-        node.find('.dairy_page_day').text(moment().format('ddd'));
+        diary.stage = "addnew";
+        node.find('#diary_title_edit').val("");
+        node.find('#diary_subtitle_edit').val("By " + diary.name);
+        node.find('#diary_content_edit').val("");
+        node.find('.diary_page_date').text(moment().format('MMM Do'));
+        node.find('.diary_page_day').text(moment().format('ddd'));
         weatherData.current = 0;
         emotionData.current = 0;
-        node.find('.dairy_page_weather').html(weatherData.icons[0]);
-        node.find('.dairy_page_emotion').html(emotionData.icons[0]);
-        node.find('.dairy_page_thumb img').attr('src', "images/image.svg");
-        $('#dairy_image_upload').attr("src", "");
-        node.find('.dairy_page_thumb').show();
-        if (dairy.newComer) {
+        node.find('.diary_page_weather').html(weatherData.icons[0]);
+        node.find('.diary_page_emotion').html(emotionData.icons[0]);
+        node.find('.diary_page_thumb img').attr('src', "images/image.svg");
+        $('#diary_image_upload').attr("src", "");
+        node.find('.diary_page_thumb').show();
+        if (diary.newComer) {
             setTimeout(function () {
                 showBalloon("3.4", "1.8", "Click emoji to change it!", 2);
             }, 1000);
@@ -419,18 +419,18 @@ function showEdit(obj) {
     }
     weatherData.current = 0;
     emotionData.current = 0;
-    $('#dairy_edit_apply').text("Save");
-    $('#dairy_edit_cancel').text("Cancel");
-    $('#dairy_edit_attention').text("Really leave without saving?");
-    $('#dairy_edit_attention').addClass("hide").hide();
-    $('#dairy_uploadicon').show();
+    $('#diary_edit_apply').text("Save");
+    $('#diary_edit_cancel').text("Cancel");
+    $('#diary_edit_attention').text("Really leave without saving?");
+    $('#diary_edit_attention').addClass("hide").hide();
+    $('#diary_uploadicon').show();
     myDropzone.removeAllFiles(true);
     node.removeClass('hide').show();
 }
 
 function indexClick(id) {
     'use strict';
-    var des = id + dairy.indexCount + 1 - dairy.index;
+    var des = id + diary.indexCount + 1 - diary.index;
     turnover(des);
 }
 
@@ -444,9 +444,9 @@ function checkMemory() {
     } else {
         memoryData = [];
     }
-    dairy.memoryCount = memoryData.length;
-    dairy.indexCount = parseInt(indexData.length / 15, 10) + 1;
-    dairy.pageCount = dairy.memoryCount + dairy.indexCount + 2;
+    diary.memoryCount = memoryData.length;
+    diary.indexCount = parseInt(indexData.length / 15, 10) + 1;
+    diary.pageCount = diary.memoryCount + diary.indexCount + 2;
 }
 
 function getMemories(done, error) {
@@ -468,63 +468,63 @@ function addMemory(obj) {
     memoryData.push(obj);
     checkMemory();
 
-    node = $('.dairy_active_container').eq(1 - dairy.currC);
+    node = $('.diary_active_container').eq(1 - diary.currC);
     if (node.attr("content") !== "memory") {
         node.children().empty();
-        $('#dairy_page_temp_memory').clone(true).removeAttr('id').appendTo(node.children());
+        $('#diary_page_temp_memory').clone(true).removeAttr('id').appendTo(node.children());
         node.attr("content", "memory");
     }
     loadMemory(node, memoryData[memoryData.length - 1]);
-    dairy.currC = 1 - dairy.currC;
-    dairy.index = dairy.pageCount - 2;
-    node.find(".dairy_page_pageID").text(dairy.index + " / " + (dairy.pageCount - 1));
+    diary.currC = 1 - diary.currC;
+    diary.index = diary.pageCount - 2;
+    node.find(".diary_page_pageID").text(diary.index + " / " + (diary.pageCount - 1));
     node.show()
         .css("z-index", 1000)
         .removeClass('flipping flipani flipped');
-    $('#dairy_edit_container').addClass("hide").hide();
-    dairy.stage = "memory";
+    $('#diary_edit_container').addClass("hide").hide();
+    diary.stage = "memory";
 }
 
 function updateMemory(obj) {
     'use strict';
     var node;
-    memoryData[dairy.index - dairy.indexCount - 1] = obj;
+    memoryData[diary.index - diary.indexCount - 1] = obj;
     checkMemory();
-    node = $('.dairy_active_container').eq(dairy.currC);
+    node = $('.diary_active_container').eq(diary.currC);
     loadMemory(node, obj);
-    $('#dairy_edit_container').addClass("hide").hide();
-    dairy.stage = "memory";
+    $('#diary_edit_container').addClass("hide").hide();
+    diary.stage = "memory";
 }
 
 function deleteMemory() {
     'use strict';
     var node0, node1, index;
-    index = dairy.index - dairy.indexCount - 1;
+    index = diary.index - diary.indexCount - 1;
     memoryData.splice(index, 1);
     checkMemory();
 
-    dairy.flipping = true;
-    node0 = $('.dairy_active_container').eq(dairy.currC);
+    diary.flipping = true;
+    node0 = $('.diary_active_container').eq(diary.currC);
 
-    if (dairy.index === dairy.pageCount - 1) {
-        dairy.stage = "last";
+    if (diary.index === diary.pageCount - 1) {
+        diary.stage = "last";
     } else {
-        dairy.stage = "memory";
+        diary.stage = "memory";
     }
 
-    if (dairy.stage === "last") {
-        node1 = $('#dairy_last_container');
-    } else if (dairy.stage === "memory") {
-        node1 = $('.dairy_active_container').eq(1 - dairy.currC);
+    if (diary.stage === "last") {
+        node1 = $('#diary_last_container');
+    } else if (diary.stage === "memory") {
+        node1 = $('.diary_active_container').eq(1 - diary.currC);
         if (node1.attr("content") !== "memory") {
             node1.children().empty();
-            $('#dairy_page_temp_memory').clone(true).removeAttr('id').appendTo(node1.children());
+            $('#diary_page_temp_memory').clone(true).removeAttr('id').appendTo(node1.children());
             node1.attr("content", "memory");
         }
-        loadMemory(node1, memoryData[dairy.index - dairy.indexCount - 1]);
-        dairy.currC = 1 - dairy.currC;
+        loadMemory(node1, memoryData[diary.index - diary.indexCount - 1]);
+        diary.currC = 1 - diary.currC;
     }
-    node1.find(".dairy_page_pageID").text(dairy.index + " / " + (dairy.pageCount - 1));
+    node1.find(".diary_page_pageID").text(diary.index + " / " + (diary.pageCount - 1));
 
     node0.show();
     node1.show();
@@ -533,7 +533,7 @@ function deleteMemory() {
     node1.removeClass('flipping flipani flipped');
     node0.addClass('leaving flipani');
     setTimeout(function () {
-        dairy.flipping = false;
+        diary.flipping = false;
         node0.hide().removeClass('leaving').css("z-index", 1000);
     }, 1000);
 }
@@ -551,24 +551,24 @@ function loading(callback) {
                 if (data.success) {
                     $('#loading_title div').css('width', '60%');
                     $('#loading_text').text(data.params.name);
-                    dairy.name = data.params.name;
-                    dairy.id = data.params.id;
-                    dairy.icon = data.params.icon;
-                    dairy.newComer = false;
+                    diary.name = data.params.name;
+                    diary.id = data.params.id;
+                    diary.icon = data.params.icon;
+                    diary.newComer = false;
                     changeAvatar(data.params.icon);
-                    $('#dairy_icon').text(iconData.icons[iconData.current]);
-                    $('#dairy_title').text(data.params.name.split(" ")[0] + "'s Dairy");
+                    $('#diary_icon').text(iconData.icons[iconData.current]);
+                    $('#diary_title').text(data.params.name.split(" ")[0] + "'s Diary");
                     $('#desk').removeClass('hide');
-                    dairy.hasLogin = true;
+                    diary.hasLogin = true;
 
-                    $('#dairy_info_text_logout').text("Logged in as " + data.params.id);
-                    showNode('#dairy_info_text_logout');
-                    showNode('#dairy_info_logout');
-                    hideNode('#dairy_info_text_signup', true);
-                    hideNode('#dairy_info_signup', true);
-                    $('#dairy_page_form').hide();
-                    showNode('#dairy_page_quote');
-                    showNode('#dairy_first_container .dairy_page_next');
+                    $('#diary_info_text_logout').text("Logged in as " + data.params.id);
+                    showNode('#diary_info_text_logout');
+                    showNode('#diary_info_logout');
+                    hideNode('#diary_info_text_signup', true);
+                    hideNode('#diary_info_signup', true);
+                    $('#diary_page_form').hide();
+                    showNode('#diary_page_quote');
+                    showNode('#diary_first_container .diary_page_next');
                     showNode('#pen_main');
 
                     getMemories(function () {

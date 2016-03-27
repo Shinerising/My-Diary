@@ -316,7 +316,7 @@ app.post('/pages', function(req, res) {
     }
 });
 
-/* Add a new dairy */
+/* Add a new diary */
 
 app.post('/addnew', function(req, res) {
     if (req.session && req.session.userid) {
@@ -365,7 +365,7 @@ app.post('/addnew', function(req, res) {
     }
 });
 
-/* Update a existed dairy */
+/* Update a existed diary */
 
 app.post('/update', function(req, res) {
     if (req.session && req.session.userid) {
@@ -418,7 +418,7 @@ app.post('/update', function(req, res) {
     }
 });
 
-/* Delete a existed dairy */
+/* Delete a existed diary */
 
 app.post('/delete', function(req, res) {
     if (req.session && req.session.userid) {

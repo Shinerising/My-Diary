@@ -123,7 +123,7 @@ body {
     }
 }
 
-#dairy_main {
+#diary_main {
     transform: scale(.8);
     width: 7.5rem;
     height: 10rem;
@@ -132,7 +132,7 @@ body {
     transition: transform 2s;
 }
 
-#dairy_back {
+#diary_back {
     position: absolute;
     top: 1.125rem;
     left: .5rem;
@@ -145,7 +145,7 @@ body {
     box-sizing: border-box;
 }
 
-#dairy_bottom0 {
+#diary_bottom0 {
     position: absolute;
     top: 8.7375rem;
     left: .52rem;
@@ -157,7 +157,7 @@ body {
     box-sizing: border-box;
 }
 
-#dairy_bottom {
+#diary_bottom {
     position: absolute;
     top: 9.1875rem;
     left: .1875rem;
@@ -170,7 +170,7 @@ body {
     box-sizing: border-box;
 }
 
-#dairy_bottom1 {
+#diary_bottom1 {
     position: absolute;
     top: 8.7375rem;
     left: 6.9375rem;
@@ -183,7 +183,7 @@ body {
     box-sizing: border-box;
 }
 
-#dairy_spine {
+#diary_spine {
     position: absolute;
     top: .4375rem;
     left: .125rem;
@@ -194,7 +194,7 @@ body {
     background-image: url(textures/45-degree-fabric-light.png);
 }
 
-#dairy_bookmark {
+#diary_bookmark {
     position: absolute;
     left: .5rem;
     bottom: -.3rem;
@@ -207,11 +207,11 @@ body {
     -webkit-clip-path: polygon(100% 0, 100% 100%, 50% 70%, 0 100%, 0 0);
 }
 
-#dairy_main.open #dairy_bookmark {
+#diary_main.open #diary_bookmark {
     cursor: pointer;
 }
 
-#dairy_bookmark:before {
+#diary_bookmark:before {
     content: "⬅︎";
     color: darksalmon;
     text-align: center;
@@ -220,11 +220,11 @@ body {
     transition: opacity 1s;
 }
 
-#dairy_main.open #dairy_bookmark:before {
+#diary_main.open #diary_bookmark:before {
     opacity: 1;
 }
 
-#dairy_cover_container {
+#diary_cover_container {
     position: absolute;
     top: -.125rem;
     left: -.1875rem;
@@ -234,16 +234,16 @@ body {
     transition: transform 2s;
 }
 
-#dairy_main.open {
+#diary_main.open {
     transform: none;
 }
 
-#dairy_main.open #dairy_cover_container {
+#diary_main.open #diary_cover_container {
     transform: rotateY(-180deg);
     pointer-events: none;
 }
 
-#dairy_cover {
+#diary_cover {
     position: absolute;
     top: 0;
     right: 0;
@@ -256,7 +256,7 @@ body {
     box-shadow: -.05rem -.05rem .1rem rgba(100,100,100,.4) inset;
 }
 
-#dairy_front {
+#diary_front {
     width: 6.25rem;
     height: 8.125rem;
     margin: .3125rem auto;
@@ -265,7 +265,7 @@ body {
     border: .04rem dashed rgba(70, 50, 30, .8);
 }
 
-#dairy_title {
+#diary_title {
     width: 5rem;
     height: 1.75rem;
     margin: 0 auto;
@@ -282,7 +282,7 @@ body {
     text-shadow: rgba(170, 136, 102, 0.5) 0 .02rem .02rem;
 }
 
-#dairy_icon {
+#diary_icon {
     width: 2.5rem;
     height: 2.5rem;
     margin: .75rem auto;
@@ -296,7 +296,7 @@ body {
     text-shadow: rgba(170, 136, 102, 0.5) 0 .03rem .03rem;
 }
 
-#dairy_pages {
+#diary_pages {
     position: absolute;
     top: .5625rem;
     left: -6.1875rem;
@@ -307,47 +307,47 @@ body {
     -webkit-perspective: 20rem;
 }
 
-.dairy_page_container {
+.diary_page_container {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 10;
 }
 
-#dairy_first_container {
+#diary_first_container {
     z-index: 1000
 }
 
-#dairy_last_container {
+#diary_last_container {
     z-index: 1
 }
 
-.dairy_page_container.flipping {
+.diary_page_container.flipping {
     transform: rotateY(-180deg);
     pointer-events: none;
 }
 
-.dairy_page_container.leaving {
+.diary_page_container.leaving {
     transform: rotate(-10deg) translate(10rem,-10rem);
 }
 
-.dairy_page_container.flipani {
+.diary_page_container.flipani {
     transition: transform 1s;
 }
 
-.dairy_page_container.flipped .dairy_page_main {
+.diary_page_container.flipped .diary_page_main {
     display: none;
 }
 
-.dairy_page_container.quickflipping {
+.diary_page_container.quickflipping {
     animation: quickflipping .2s infinite linear;
 }
 
-.dairy_page_container.quickflippingback {
+.diary_page_container.quickflippingback {
     animation: quickflipping .2s infinite reverse linear;
 }
 
-.dairy_page {
+.diary_page {
     position: absolute;
     top: 0;
     right: 0;
@@ -361,7 +361,7 @@ body {
     border: .02rem solid rgba(100, 100, 100, .4);
 }
 
-#dairy_page_quote {
+#diary_page_quote {
     text-align: center;
     margin-top: 1.5rem;
     font-size: .4rem;
@@ -372,7 +372,7 @@ body {
     padding: 0 .8rem;
 }
 
-#dairy_page_form {
+#diary_page_form {
     padding: .5rem 1.3rem;
     font-size: .25rem;
     line-height: .5rem;
@@ -380,7 +380,7 @@ body {
     transition: opacity .5s;
 }
 
-#dairy_avatar {
+#diary_avatar {
     font-style: normal;
     width: 2rem;
     height: 2rem;
@@ -396,23 +396,23 @@ body {
     background: linear-gradient(to right, rgba(100, 100, 100, .1), rgba(100, 100, 100, .2));
 }
 
-#dairy_name {
+#diary_name {
     transition: opacity .5s;
 }
 
-#dairy_id {
+#diary_id {
     transition: opacity .5s;
 }
 
-#dairy_password {
+#diary_password {
     transition: opacity .5s;
 }
 
-#dairy_password_repeat {
+#diary_password_repeat {
     transition: opacity .5s;
 }
 
-.dairy_input {
+.diary_input {
     float: right;
     width: 2.5rem;
     height: .42rem;
@@ -427,50 +427,50 @@ body {
     font-style: italic;
 }
 
-.dairy_input:focus {
+.diary_input:focus {
     border-bottom: .02rem solid #000;
 }
 
-#dairy_formbuttons {
+#diary_formbuttons {
     margin-top: .2rem;
     position: relative;
 }
 
-#dairy_clear {
+#diary_clear {
     position: absolute;
     left: 0;
 }
 
-#dairy_signup,
-#dairy_login {
+#diary_signup,
+#diary_login {
     position: absolute;
     right: 0;
 }
 
-#dairy_formsending {
+#diary_formsending {
     text-align: center;
     font-size: .4rem;
     transition: opacity .5s;
 }
 
-#dairy_info_text_signup,
-#dairy_info_text_login,
-#dairy_info_text_logout {
+#diary_info_text_signup,
+#diary_info_text_login,
+#diary_info_text_logout {
     position: absolute;
     left: 0;
     top: 0;
     transition: opacity .5s;
 }
 
-#dairy_info_signup,
-#dairy_info_login,
-#dairy_info_logout {
+#diary_info_signup,
+#diary_info_login,
+#diary_info_logout {
     position: absolute;
     right: 0;
     top: 0;
 }
 
-.dairy_page_index_content {
+.diary_page_index_content {
     width: 90%;
     height: 7rem;
     padding: 0 5%;
@@ -482,13 +482,13 @@ body {
     background-image: linear-gradient(0deg, transparent 95%, #BBB 95%, #BBB 100%);
 }
 
-.dairy_page_index_title {
+.diary_page_index_title {
     font-size: .6rem;
     font-style: italic;
     line-height: 1.4rem;
 }
 
-.dairy_page_index_list {
+.diary_page_index_list {
     width: 90%;
     display: inline-block;
     text-decoration: underline;
@@ -496,11 +496,11 @@ body {
     cursor: pointer;
 }
 
-.dairy_page_index_list:hover {
+.diary_page_index_list:hover {
     color: #000;
 }
 
-.dairy_page_header {
+.diary_page_header {
     width: 90%;
     height: .5rem;
     padding: .475rem 5% 0 5%;
@@ -510,36 +510,36 @@ body {
     border-bottom: .025rem solid rgba(100, 100, 100, .8);
 }
 
-.dairy_page_info {
+.diary_page_info {
     font-style: italic;
     margin-right: .125rem;
     position: relative;
 }
 
-.dairy_page_date {
+.diary_page_date {
     font-style: italic;
     margin-right: .125rem;
 }
 
-.dairy_page_day {
+.diary_page_day {
     margin-right: .2rem;
     font-size: .225rem;
 }
 
-.dairy_page_weather {
+.diary_page_weather {
     margin-right: .1rem;
     display: inline-block;
     width: .4rem;
     cursor: pointer;
 }
 
-.dairy_page_emotion {
+.diary_page_emotion {
     display: inline-block;
     width: .4rem;
     cursor: pointer;
 }
 
-.dairy_page_thumb {
+.diary_page_thumb {
     float: right;
     top: .5rem;
     width: 2rem;
@@ -557,19 +557,19 @@ body {
     box-shadow: 0 .1rem .1rem rgba(100, 100, 100, .3);
 }
 
-.dairy_page_thumb:hover {
+.diary_page_thumb:hover {
     transform: scale(2) translate(-.9rem, .8rem);
 }
 
 
-.dairy_page_thumb img {
+.diary_page_thumb img {
     width: 100%;
 }
 
-.dairy_page_thumb.dairy_edit {
+.diary_page_thumb.diary_edit {
 }
 
-#dairy_edit_image {
+#diary_edit_image {
     position: absolute;
     right: .4rem;
     transform: none;   
@@ -578,37 +578,37 @@ body {
     animation: dropIn .5s 1s both;
 }
 
-#dairy_edit_image:hover {
+#diary_edit_image:hover {
     transform: none;
 }
 
-#dairy_uploadicon {
+#diary_uploadicon {
 }
 
 .dz-details, .dz-progress, .dz-error-message, .dz-success-mark, .dz-error-mark {
     display: none;
 }
 
-.dairy_delete,
-.dairy_cancel,
-#dairy_edit_cancel {
+.diary_delete,
+.diary_cancel,
+#diary_edit_cancel {
     position: absolute;
     right: 1.1rem;
     font-size: .25rem;
     bottom: 0;
 }
 
-.dairy_update,
-.dairy_apply,
-#dairy_edit_apply {
+.diary_update,
+.diary_apply,
+#diary_edit_apply {
     position: absolute;
     right: .3rem;
     font-size: .25rem;
     bottom: 0;
 }
 
-.dairy_attention,
-#dairy_edit_attention {
+.diary_attention,
+#diary_edit_attention {
     position: absolute;
     left: .3rem;
     font-size: .25rem;
@@ -619,7 +619,7 @@ body {
     background-image: url(textures/white-plaster.png);
 }
 
-.dairy_page_content {
+.diary_page_content {
     width: 90%;
     height: 7rem;
     padding: 0 5%;
@@ -636,20 +636,20 @@ body {
     user-select: initial;
 }
 
-.dairy_page_title {
+.diary_page_title {
     font-size: .4rem;
     line-height: .7rem;
     font-weight: bold;
 }
 
-.dairy_page_subtitle {
+.diary_page_subtitle {
     font-size: .2rem;
     font-style: italic;
     color: #555;
     line-height: .35rem;
 }
 
-.dairy_page_content p {
+.diary_page_content p {
     text-indent: .3rem;
     font-size: .25rem;
     line-height: .35rem;
@@ -659,7 +659,7 @@ body {
     -webkit-margin-after: 0;
 }
 
-.dairy_page_foot {
+.diary_page_foot {
     position: absolute;
     font-size: .2rem;
     line-height: .5rem;
@@ -670,23 +670,23 @@ body {
     background-image: url(textures/white-plaster.png);
 }
 
-.dairy_page_pageID {
+.diary_page_pageID {
     text-align: center;
 }
 
-.dairy_page_previous {
+.diary_page_previous {
     position: absolute;
     left: .2rem;
     top: 0;
 }
 
-.dairy_page_next {
+.diary_page_next {
     position: absolute;
     right: .2rem;
     top: 0;
 }
 
-.dairy_button {
+.diary_button {
     font-style: italic;
     cursor: pointer;
     color: #666;
@@ -694,32 +694,32 @@ body {
     transition: opacity .5s;
 }
 
-.dairy_button:hover {
+.diary_button:hover {
     color: #000;
 }
 
-.dairy_button.disabled {
+.diary_button.disabled {
     color: #AAA;
     cursor: default;
 }
 
-#dairy_last_button {
+#diary_last_button {
     text-align: center;
     margin-top: 3.5rem;
     font-size: .4rem;
 }
 
-#dairy_about_button {
+#diary_about_button {
     font-size: .2rem;
     text-align: center;
     margin-top: 1.5rem;
 }
 
-#dairy_edit_container {
+#diary_edit_container {
     z-index: 1010;
 }
 
-#dairy_title_edit {
+#diary_title_edit {
     background: none;
     border: none;
     height: .7rem;
@@ -730,7 +730,7 @@ body {
     outline: none;
 }
 
-#dairy_subtitle_edit {
+#diary_subtitle_edit {
     background: none;
     border: none;
     width: 4.2rem;
@@ -740,7 +740,7 @@ body {
     outline: none;
 }
 
-#dairy_content_edit {
+#diary_content_edit {
     background: none;
     border: none;
     width: 100%;
